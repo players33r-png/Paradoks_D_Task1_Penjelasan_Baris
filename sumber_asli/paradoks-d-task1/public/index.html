@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111016">
+  <meta name="description" content="Paradoks D. Task — ruang tenang untuk mengelola hal-hal yang penting.">
+  <title>Paradoks D. Task — ruang untuk fokus</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
+      <a class="brand" href="#dashboard" aria-label="Paradoks D. Task, beranda" data-view-link="all">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-copy"><strong>paradoks<span>.</span></strong><small>D. TASK / PERSONAL SPACE</small></span>
+      </a>
+
+      <div class="nav-label">RUANG KERJA</div>
+      <nav class="primary-nav">
+        <button class="nav-item is-active" type="button" data-view="all" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">◫</span><span>Semua tugas</span><span class="nav-count" id="nav-all-count">0</span>
+        </button>
+        <button class="nav-item" type="button" data-view="today">
+          <span class="nav-icon" aria-hidden="true">◷</span><span>Hari ini</span><span class="nav-count" id="nav-today-count">0</span>
+        </button>
+        <button class="nav-item" type="button" data-view="upcoming">
+          <span class="nav-icon" aria-hidden="true">↗</span><span>Mendatang</span><span class="nav-count" id="nav-upcoming-count">0</span>
+        </button>
+        <button class="nav-item" type="button" data-view="completed">
+          <span class="nav-icon" aria-hidden="true">✓</span><span>Selesai</span><span class="nav-count" id="nav-completed-count">0</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-divider"></div>
+      <div class="nav-label">PREFERENSI</div>
+      <button class="nav-item utility-item" id="theme-toggle" type="button">
+        <span class="nav-icon" id="theme-icon" aria-hidden="true">☼</span><span id="theme-label">Tampilan terang</span>
+      </button>
+      <button class="nav-item utility-item" id="export-button" type="button">
+        <span class="nav-icon" aria-hidden="true">⇩</span><span>Ekspor cadangan</span>
+      </button>
+      <button class="nav-item utility-item" id="import-button" type="button">
+        <span class="nav-icon" aria-hidden="true">⇧</span><span>Impor cadangan</span>
+      </button>
+      <input id="import-file" type="file" accept=".json,application/json" hidden>
+
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-note">
+        <div class="note-symbol" aria-hidden="true">✳</div>
+        <p>Tak semua harus selesai hari ini.</p>
+        <span>Yang penting, mulai.</span>
+        <div class="note-line" aria-hidden="true"></div>
+      </div>
+      <div class="sidebar-bottom"><span class="online-dot" aria-hidden="true"></span><span>Ruang pribadimu</span><span class="version">v1.0</span></div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div class="breadcrumb"><span>WORKSPACE</span><span class="breadcrumb-slash">/</span><strong id="breadcrumb-current">OVERVIEW</strong></div>
+        <div class="topbar-right">
+          <div class="date-stamp"><span class="date-dot" aria-hidden="true"></span><span id="current-date">Memuat tanggal…</span></div>
+          <button class="icon-button mobile-menu" id="mobile-menu" type="button" aria-label="Buka navigasi" aria-expanded="false">☰</button>
+          <button class="avatar" id="focus-button" type="button" title="Mode fokus" aria-label="Mode fokus"><span>PD</span></button>
+        </div>
+      </header>
+
+      <div class="page-wrap">
+        <section class="welcome-section" aria-labelledby="page-title">
+          <div class="welcome-copy">
+            <div class="eyebrow"><span class="eyebrow-line"></span> YOUR SPACE TO THINK CLEARLY</div>
+            <h1 id="page-title">Beri ruang untuk<br><em>hal yang berarti.</em></h1>
+            <p>Susun pikiranmu. Kerjakan satu per satu. Sisanya, biarkan menunggu.</p>
+            <button class="button button-primary welcome-add" type="button" data-open-task>
+              <span class="button-plus" aria-hidden="true">+</span> Buat tugas baru <span class="button-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+          <div class="art-panel" aria-hidden="true">
+            <div class="art-grid"></div>
+            <div class="art-ring ring-one"></div><div class="art-ring ring-two"></div><div class="art-ring ring-three"></div>
+            <div class="art-core"><span>D.</span><small>FOCUS / FLOW</small></div>
+            <div class="art-star star-one">✳</div><div class="art-star star-two">✦</div>
+            <div class="art-caption"><span>01 — 04</span><span>MAKE IT MATTER</span></div>
+          </div>
+          <div class="welcome-index" aria-hidden="true"><span>01</span><span class="index-rule"></span><span>04</span></div>
+        </section>
+
+        <section class="stats-grid" aria-label="Ringkasan tugas">
+          <article class="stat-card stat-total">
+            <div class="stat-top"><span class="stat-label">TOTAL TUGAS</span><span class="stat-symbol" aria-hidden="true">↗</span></div>
+            <div class="stat-number" id="stat-total">0</div><div class="stat-foot"><span class="stat-mini-dot"></span><span>Semua yang ada di daftar</span></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span class="stat-label">SEDANG BERJALAN</span><span class="stat-symbol symbol-violet" aria-hidden="true">◌</span></div>
+            <div class="stat-number" id="stat-active">0</div><div class="stat-foot"><span class="status-dot status-active"></span><span>Pelan-pelan, tetap jalan</span></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span class="stat-label">SELESAI</span><span class="stat-symbol symbol-lime" aria-hidden="true">✓</span></div>
+            <div class="stat-number" id="stat-done">0</div><div class="stat-foot"><span class="status-dot status-done"></span><span id="completion-caption">Setiap langkah berarti</span></div>
+          </article>
+          <article class="stat-card stat-progress-card">
+            <div class="stat-top"><span class="stat-label">PROGRES KESELURUHAN</span><span class="stat-percent" id="progress-percent">0%</span></div>
+            <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="stat-foot"><span id="progress-caption">Awal yang baik dimulai dari satu tugas</span></div>
+          </article>
+        </section>
+
+        <section class="tasks-section" aria-labelledby="tasks-heading">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow small-eyebrow"><span class="eyebrow-line"></span> THE DOING SPACE</div>
+              <h2 id="tasks-heading">Daftar <em>tugas.</em></h2>
+              <p id="tasks-subtitle">Semua hal yang ingin kamu selesaikan, di satu tempat.</p>
+            </div>
+            <button class="button button-outline desktop-add" type="button" data-open-task><span class="button-plus" aria-hidden="true">+</span> Tambah tugas</button>
+          </div>
+
+          <div class="task-toolbar">
+            <div class="filter-tabs" role="group" aria-label="Filter status tugas">
+              <button class="filter-tab is-selected" type="button" data-status="all" aria-pressed="true">Semua <span id="filter-all-count">0</span></button>
+              <button class="filter-tab" type="button" data-status="active" aria-pressed="false">Belum selesai <span id="filter-active-count">0</span></button>
+              <button class="filter-tab" type="button" data-status="done" aria-pressed="false">Tuntas <span id="filter-done-count">0</span></button>
+            </div>
+            <div class="toolbar-tools">
+              <label class="search-box"><span aria-hidden="true">⌕</span><input type="search" id="task-search" placeholder="Cari tugas…" aria-label="Cari tugas"><kbd>/</kbd></label>
+              <label class="sort-control"><span class="sr-only">Urutkan tugas</span><select id="sort-select" aria-label="Urutkan tugas"><option value="date">Tanggal terdekat</option><option value="priority">Prioritas</option><option value="created">Terbaru dibuat</option><option value="title">Nama A–Z</option></select></label>
+            </div>
+          </div>
+
+          <div class="task-list" id="task-list" aria-live="polite" aria-busy="false"></div>
+          <div class="task-list-footer"><span id="visible-count">0 tugas ditampilkan</span><span><span class="footer-key">↵</span> <span>Perubahan tersimpan otomatis di browser ini</span></span></div>
+        </section>
+
+        <footer class="page-footer"><span>PARADOKS D. TASK <span class="footer-dot">•</span> MADE FOR YOUR OWN PACE</span><span>Fokus pada proses, bukan kesempurnaan.</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <div class="sidebar-scrim" id="sidebar-scrim" hidden></div>
+
+  <dialog class="task-dialog" id="task-dialog" aria-labelledby="dialog-title">
+    <form id="task-form" class="dialog-form">
+      <div class="dialog-header">
+        <div><div class="eyebrow small-eyebrow"><span class="eyebrow-line"></span> ADD TO YOUR SPACE</div><h2 id="dialog-title">Tugas <em>baru.</em></h2><p>Simpan satu hal yang ingin kamu selesaikan.</p></div>
+        <button class="icon-button close-dialog" id="close-dialog" type="button" aria-label="Tutup formulir">×</button>
+      </div>
+      <input type="hidden" id="task-id">
+      <label class="field-label" for="task-title">Nama tugas <span>*</span></label>
+      <input class="text-field" id="task-title" name="title" type="text" maxlength="120" placeholder="Misalnya: menyelesaikan draft pertama" required autocomplete="off">
+      <label class="field-label" for="task-description">Catatan <span class="optional">(opsional)</span></label>
+      <textarea class="text-field text-area" id="task-description" name="description" rows="3" maxlength="500" placeholder="Tambahkan detail kecil supaya lebih jelas…"></textarea>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label" for="task-category">Kategori</label><select class="text-field" id="task-category" name="category"><option value="Personal">Personal</option><option value="Akademik">Akademik</option><option value="Kreatif">Kreatif</option><option value="Pekerjaan">Pekerjaan</option></select></div>
+        <div class="field-group"><label class="field-label" for="task-priority">Prioritas</label><select class="text-field" id="task-priority" name="priority"><option value="medium">Normal</option><option value="high">Penting</option><option value="low">Santai</option></select></div>
+      </div>
+      <label class="field-label" for="task-due">Tanggal target <span class="optional">(opsional)</span></label>
+      <input class="text-field" id="task-due" name="dueDate" type="date">
+      <div class="dialog-actions"><button class="button button-ghost" id="cancel-dialog" type="button">Batal</button><button class="button button-primary" id="save-task-button" type="submit">Simpan tugas <span aria-hidden="true">↗</span></button></div>
+      <p class="form-footnote"><span aria-hidden="true">✳</span> Tidak harus selesai sekaligus. Mulai saja dulu.</p>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="focus-overlay" id="focus-overlay" hidden>
+    <div class="focus-card"><span class="focus-kicker">A MOMENT FOR YOURSELF</span><div class="focus-glyph" aria-hidden="true">✳</div><h2>Tarik napas.<br><em>Pilih satu hal.</em></h2><p>Fokus bukan tentang melakukan semuanya. Fokus adalah memberi perhatian pada satu hal yang ada di depanmu.</p><button class="button button-primary" id="exit-focus" type="button">Kembali ke ruang kerja <span aria-hidden="true">↗</span></button></div>
+  </div>
+</body>
+</html>

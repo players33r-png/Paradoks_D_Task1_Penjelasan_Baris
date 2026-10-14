@@ -1,0 +1,10 @@
+{
+  "name": "Paradoks D. Task",
+  "short_name": "D. Task",
+  "description": "Ruang tenang untuk mengelola hal-hal yang penting.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111016",
+  "theme_color": "#111016",
+  "icons": [{"src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+}
